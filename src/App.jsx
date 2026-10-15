@@ -1,6 +1,8 @@
 import "./App.css";
 import { useState } from "react";
-import Tarjeta from "./componentes/Tarjeta/Tarjeta";
+import Buscador from "./componentes/Buscador/Buscador";
+import Lista from "./componentes/Lista/Lista";
+import Formulario from "./componentes/Formulario/Formulario";
 
 const EQUIPO = [
   { id: 1, nombre: "Ana", rol: "Frontend", emoji: "💸" },
@@ -12,56 +14,29 @@ const EQUIPO = [
 
 function App() {
   const [equipo, setEquipo] = useState(EQUIPO);
-  const [nombre, setNombre] = useState("");
-  const [rol, setRol] = useState("");
+  const [buscar, setBuscar] = useState("");
 
-  const agregar = () => {
-    if (nombre.trim().length <= 0 || rol.trim().length <= 0) return;
+  const agregar = (nombre, rol) => {
 
     const newEquipo = [...equipo];
     newEquipo.push({ nombre, rol, id: new Date() });
 
     setEquipo(newEquipo);
 
-    setNombre("")
-    setRol("")
-
     // Forma pro:
     // setEquipo((prev) => [...prev, { nombre, equipo, id: new Date() }])
   };
 
+  const equipoFiltrado = equipo.filter((x) =>
+    x.nombre.toLowerCase().includes(buscar.toLowerCase()),
+  );
+
   return (
     <>
       <h1>SOY LA MAXIMA</h1>
-      <section id="todo-container">
-        <h3>Mi TODO App</h3>
-        <div className="container">
-          {/* .5 jensi */}
-          <input
-            id="nombre"
-            type="text"
-            placeholder="nombre"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-          />
-          <input
-            type="text"
-            id="rol"
-            placeholder="rol"
-            value={rol}
-            onChange={(e) => setRol(e.target.value)} 
-          />
-          {/* .5 para juan soriano */}
-          <button type="button" onClick={agregar}>
-            Agregar
-          </button>
-        </div>
-        <section className="lista">
-          {equipo.map((e, index) => (
-            <Tarjeta key={index} nombre={e.nombre} rol={e.rol} />
-          ))}
-        </section>
-      </section>
+      <Buscador onBuscar={setBuscar} />
+      <Formulario onAgregar={agregar} />
+      <Lista lista={equipoFiltrado} />
     </>
   );
 }
