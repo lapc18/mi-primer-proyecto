@@ -1,0 +1,24 @@
+.perfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 320px;
+  text-align: center;
+}
+
+.perfil-avatar {
+  display: grid;
+  place-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--tl-tint-indigo);
+  color: var(--tl-indigo);
+  font-size: 1.6rem;
+  font-weight: 900;
+}
+
+.perfil .boton {
+  margin-top: 0.5rem;
+}

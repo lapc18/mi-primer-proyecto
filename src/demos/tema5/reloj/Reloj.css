@@ -1,0 +1,6 @@
+.reloj {
+  font-family: var(--tl-mono);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--tl-indigo);
+}

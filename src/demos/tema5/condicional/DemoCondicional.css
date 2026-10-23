@@ -1,0 +1,15 @@
+.condicional-rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.condicional-celda {
+  gap: 0.6rem;
+  padding: 1rem;
+}
+
+.condicional-celda h3 {
+  font-family: var(--tl-mono);
+  color: var(--tl-indigo);
+}

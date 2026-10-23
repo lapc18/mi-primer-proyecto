@@ -1,0 +1,20 @@
+.eventos-campo {
+  flex: 1;
+  width: auto;
+}
+
+.eventos-zona {
+  padding: 1.25rem;
+  border: 2px dashed var(--tl-border);
+  border-radius: var(--tl-radius-sm);
+  color: var(--tl-muted);
+  text-align: center;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.eventos-zona-activa {
+  border-color: var(--tl-teal);
+  background: var(--tl-tint-teal);
+  color: var(--tl-navy);
+  font-weight: 700;
+}

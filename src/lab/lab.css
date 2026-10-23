@@ -1,0 +1,534 @@
+/* ==========================================================================
+   Layout del laboratorio: barra superior, barra lateral, área de demo,
+   visor de código y panel de logs.
+   ========================================================================== */
+
+.lab {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  height: 100vh;
+}
+
+/* ---------- Barra superior ---------- */
+
+.lab-barra {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.6rem 1.5rem;
+  border-bottom: 1px solid var(--tl-border);
+  background: var(--tl-bg);
+}
+
+.lab-marca {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--tl-navy);
+}
+
+.lab-curso {
+  font-weight: 700;
+  color: var(--tl-indigo);
+}
+
+.lab-barra-acciones {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto;
+}
+
+.lab-interruptor {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  padding: 0.3rem 0.8rem;
+  border: 2px solid var(--tl-border);
+  border-radius: var(--tl-radius-pill);
+  background: var(--tl-bg);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lab-interruptor:hover {
+  border-color: var(--tl-indigo);
+}
+
+.lab-interruptor-pista {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  border-radius: var(--tl-radius-pill);
+  background: var(--tl-border);
+  transition: background-color 0.15s;
+}
+
+.lab-interruptor-perilla {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--tl-bg);
+  box-shadow: var(--tl-shadow);
+  transition: transform 0.15s;
+}
+
+.lab-interruptor[aria-checked="true"] .lab-interruptor-pista {
+  background: var(--tl-teal);
+}
+
+.lab-interruptor[aria-checked="true"] .lab-interruptor-perilla {
+  transform: translateX(20px);
+}
+
+/* ---------- Cuerpo y barra lateral ---------- */
+
+.lab-cuerpo {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  min-height: 0;
+}
+
+.lab-cuerpo-sin-lateral {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.lab-lateral {
+  overflow-y: auto;
+  padding: 1rem 0.75rem;
+  border-right: 1px solid var(--tl-border);
+  background: var(--tl-surface);
+}
+
+.lab-lateral-tema + .lab-lateral-tema {
+  margin-top: 1.25rem;
+}
+
+.lab-lateral-titulo {
+  padding: 0 0.5rem 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--tl-indigo);
+}
+
+.lab-lateral-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0;
+  list-style: none;
+}
+
+.lab-lateral-enlace {
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: var(--tl-radius-sm);
+  color: var(--tl-navy);
+  font-size: 0.9rem;
+  line-height: 1.3;
+  text-decoration: none;
+}
+
+.lab-lateral-enlace:hover {
+  background: var(--tl-tint-indigo);
+}
+
+.lab-lateral-enlace[aria-current="page"] {
+  background: var(--tl-indigo);
+  color: var(--tl-bg);
+}
+
+.lab-lateral-id {
+  flex-shrink: 0;
+  min-width: 2rem;
+  font-family: var(--tl-mono);
+  font-weight: 700;
+}
+
+/* ---------- Área principal ---------- */
+
+.lab-principal {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) minmax(180px, 30vh);
+  gap: 1rem;
+  min-height: 0;
+  padding: 1rem 1.5rem;
+  overflow: hidden;
+}
+
+.lab-encabezado {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.lab-encabezado-fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.lab-navegacion {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.lab-titulo {
+  font-size: 1.65rem;
+  color: var(--tl-navy);
+}
+
+.lab-titulo-ubicacion {
+  font-weight: 700;
+  color: var(--tl-indigo);
+}
+
+.lab-observar {
+  font-size: 0.95rem;
+}
+
+.lab-escenario {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+  min-height: 0;
+}
+
+/* ---------- Demo ---------- */
+
+.lab-demo {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--tl-bg);
+  border: 1px solid var(--tl-border);
+  border-radius: var(--tl-radius);
+  box-shadow: var(--tl-shadow);
+}
+
+.lab-demo-barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--tl-border);
+}
+
+.lab-demo-titulo {
+  font-size: 0.95rem;
+  color: var(--tl-indigo);
+}
+
+.lab-demo-cuerpo {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 1.25rem;
+}
+
+/* Controles que agrega el laboratorio (no son parte de la demo). */
+.lab-controles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 2px dashed var(--tl-border);
+  border-radius: var(--tl-radius-sm);
+  background: var(--tl-surface);
+  font-size: 0.9rem;
+}
+
+/* ---------- Visor de código ---------- */
+
+.visor {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: var(--tl-radius);
+  background: var(--code-bg);
+  color: var(--code-text);
+}
+
+.visor-barra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 0.4rem 0.5rem 0;
+  background: var(--code-bar);
+}
+
+.visor-pestana {
+  padding: 0.35rem 0.9rem;
+  border: none;
+  border-radius: var(--tl-radius-sm) var(--tl-radius-sm) 0 0;
+  background: transparent;
+  color: var(--code-comment);
+  font-family: var(--tl-mono);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.visor-pestana:hover {
+  color: var(--code-text);
+}
+
+.visor-pestana[aria-selected="true"] {
+  background: var(--code-bg);
+  color: var(--code-tag);
+  font-weight: 700;
+}
+
+.visor-pestana:focus-visible {
+  outline-color: var(--tl-aqua);
+  outline-offset: -3px;
+}
+
+.visor-ruta {
+  padding: 0.4rem 1rem 0;
+  color: var(--code-comment);
+  font-family: var(--tl-mono);
+  font-size: 0.8rem;
+}
+
+.visor-codigo {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 0.5rem 0 1rem;
+  font-family: var(--tl-mono);
+  font-size: 0.92rem;
+  font-variant-ligatures: none;
+  line-height: 1.55;
+}
+
+.visor-linea {
+  display: flex;
+  cursor: pointer;
+}
+
+.visor-linea:hover {
+  background: var(--code-line-hl);
+}
+
+.visor-linea-marcada,
+.visor-linea-marcada:hover {
+  background: var(--code-line-hl);
+  box-shadow: inset 4px 0 0 var(--tl-aqua);
+}
+
+.visor-numero {
+  flex-shrink: 0;
+  width: 3.2rem;
+  padding-right: 1rem;
+  color: var(--code-gutter);
+  text-align: right;
+  user-select: none;
+}
+
+.visor-texto {
+  padding-right: 1rem;
+  white-space: pre;
+}
+
+.tk-clave { color: var(--code-keyword); }
+.tk-funcion { color: var(--code-fn); }
+.tk-cadena { color: var(--code-string); }
+.tk-etiqueta { color: var(--code-tag); }
+.tk-atributo { color: var(--code-attr); }
+.tk-comentario { color: var(--code-comment); font-style: italic; }
+.tk-numero { color: var(--code-number); }
+
+/* ---------- Panel de logs ---------- */
+
+.logs {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: var(--tl-radius);
+  background: var(--code-bg);
+  color: var(--code-text);
+}
+
+.logs-barra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: var(--code-bar);
+}
+
+.logs-titulo {
+  font-size: 0.9rem;
+  color: var(--tl-aqua);
+}
+
+.logs-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.logs-filtro,
+.logs-tipo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.1rem 0.6rem;
+  border: none;
+  border-radius: var(--tl-radius-pill);
+  font-family: var(--tl-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.logs-filtro {
+  cursor: pointer;
+}
+
+.logs-filtro[aria-pressed="false"] {
+  opacity: 0.35;
+  text-decoration: line-through;
+}
+
+.logs-filtro:focus-visible,
+.logs-limpiar:focus-visible,
+.logs-autoscroll input:focus-visible {
+  outline-color: var(--tl-aqua);
+}
+
+.logs-filtro-cuenta {
+  font-weight: 400;
+}
+
+.logs-autoscroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: auto;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.logs-limpiar {
+  padding: 0.2rem 0.8rem;
+  border: 1px solid var(--code-gutter);
+  border-radius: var(--tl-radius-sm);
+  background: transparent;
+  color: var(--code-text);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.logs-limpiar:hover {
+  background: var(--code-line-hl);
+}
+
+.logs-cuerpo {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.4rem 0;
+  font-family: var(--tl-mono);
+  font-size: 0.85rem;
+  font-variant-ligatures: none;
+}
+
+.logs-vacio {
+  padding: 0.5rem 1rem;
+  color: var(--code-comment);
+}
+
+.logs-fila {
+  display: grid;
+  grid-template-columns: 6.5rem 6.5rem minmax(0, auto) minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.15rem 1rem;
+}
+
+.logs-fila:hover {
+  background: var(--code-line-hl);
+}
+
+.logs-hora {
+  color: var(--code-comment);
+}
+
+.logs-tipo {
+  justify-content: center;
+}
+
+.logs-datos {
+  overflow-wrap: anywhere;
+  color: var(--code-string);
+  font-size: 1em;
+}
+
+/* Colores por tipo: render gris, state índigo, effect violeta, cleanup ámbar,
+   fetch turquesa, event aqua, error rojo. */
+.log-tipo-render { background: var(--tl-muted); color: var(--tl-bg); }
+.log-tipo-state { background: var(--tl-indigo); color: var(--tl-bg); box-shadow: inset 0 0 0 1px var(--code-gutter); }
+.log-tipo-effect { background: var(--tl-violet); color: var(--tl-bg); }
+.log-tipo-cleanup { background: var(--tl-amber); color: var(--tl-navy); }
+.log-tipo-fetch { background: var(--tl-teal); color: var(--tl-navy); }
+.log-tipo-event { background: var(--tl-aqua); color: var(--tl-navy); }
+.log-tipo-error { background: var(--tl-red); color: var(--tl-bg); }
+
+/* ---------- Pie ---------- */
+
+.lab-pie {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.4rem 1.5rem;
+  border-top: 1px solid var(--tl-border);
+  color: var(--tl-muted);
+  font-size: 0.85rem;
+}
+
+/* ---------- Pantallas angostas ---------- */
+
+@media (max-width: 1100px) {
+  .lab {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .lab-cuerpo,
+  .lab-escenario {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lab-lateral {
+    max-height: 40vh;
+    border-right: none;
+    border-bottom: 1px solid var(--tl-border);
+  }
+
+  .lab-principal {
+    grid-template-rows: auto;
+    overflow: visible;
+  }
+
+  .visor-codigo {
+    max-height: 70vh;
+  }
+
+  .logs {
+    height: 320px;
+  }
+
+  .lab-curso {
+    display: none;
+  }
+}

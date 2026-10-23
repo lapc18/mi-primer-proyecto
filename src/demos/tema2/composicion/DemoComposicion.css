@@ -1,0 +1,33 @@
+.composicion {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 1.25rem;
+}
+
+.arbol,
+.arbol ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.arbol ul {
+  margin-left: 0.6rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--tl-border);
+}
+
+.arbol li {
+  padding: 0.15rem 0;
+}
+
+.arbol code {
+  color: var(--tl-indigo);
+  font-weight: 700;
+}
+
+@media (max-width: 1400px) {
+  .composicion {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

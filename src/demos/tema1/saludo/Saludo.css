@@ -1,0 +1,10 @@
+.titulo {
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  color: var(--tl-indigo);
+}
+
+.saludo-logo {
+  width: 96px;
+  margin-top: 1rem;
+}

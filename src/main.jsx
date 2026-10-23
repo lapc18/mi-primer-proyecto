@@ -1,10 +1,7 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { createRoot } from "react-dom/client";
+import "./styles/talendig.css";
+import Raiz from "./lab/Raiz.jsx";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+// <Raiz /> envuelve el laboratorio en <StrictMode> (activo por defecto) y
+// permite apagarlo desde la barra superior para comparar en clase.
+createRoot(document.getElementById("root")).render(<Raiz />);

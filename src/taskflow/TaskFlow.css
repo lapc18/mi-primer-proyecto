@@ -1,0 +1,31 @@
+.taskflow {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.taskflow-encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.taskflow-encabezado h2 {
+  font-size: 1.6rem;
+  color: var(--tl-navy);
+}
+
+.taskflow-contadores {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.taskflow-tarea {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+}

@@ -1,0 +1,37 @@
+.trampas-par {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.trampa {
+  gap: 0.6rem;
+  padding: 1rem;
+}
+
+.trampa h3 {
+  font-family: var(--tl-mono);
+  font-size: 1rem;
+}
+
+.trampa-mal {
+  border-color: var(--tl-red);
+}
+
+.trampa-bien {
+  border-color: var(--tl-teal);
+}
+
+/* El 0 que se cuela debe verse bien grande. */
+.trampa-salida {
+  min-height: 2.5rem;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--tl-red);
+}
+
+.trampa-salida .lista {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--tl-navy);
+}

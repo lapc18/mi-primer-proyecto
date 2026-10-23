@@ -1,0 +1,18 @@
+.boton-color {
+  min-height: 44px;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: var(--tl-radius-sm);
+  color: var(--tl-navy);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.boton-color:hover {
+  filter: brightness(0.92);
+}
+
+.boton-color:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
