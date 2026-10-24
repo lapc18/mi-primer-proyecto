@@ -474,10 +474,11 @@
   font-size: 1em;
 }
 
-/* Colores por tipo: render gris, state índigo, effect violeta, cleanup ámbar,
-   fetch turquesa, event aqua, error rojo. */
+/* Colores por tipo: render gris, state índigo, calculo claro, effect violeta,
+   cleanup ámbar, fetch turquesa, event aqua, error rojo. */
 .log-tipo-render { background: var(--tl-muted); color: var(--tl-bg); }
 .log-tipo-state { background: var(--tl-indigo); color: var(--tl-bg); box-shadow: inset 0 0 0 1px var(--code-gutter); }
+.log-tipo-calculo { background: var(--tl-surface); color: var(--tl-navy); }
 .log-tipo-effect { background: var(--tl-violet); color: var(--tl-bg); }
 .log-tipo-cleanup { background: var(--tl-amber); color: var(--tl-navy); }
 .log-tipo-fetch { background: var(--tl-teal); color: var(--tl-navy); }

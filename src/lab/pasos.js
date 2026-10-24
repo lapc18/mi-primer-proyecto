@@ -26,6 +26,18 @@ import DemoCondicional from "../demos/tema5/condicional/DemoCondicional";
 import DemoTrampas from "../demos/tema5/trampas/DemoTrampas";
 import DemoTaskFlow from "../demos/tema5/taskflow-api/DemoTaskFlow";
 import DemoTareasUsuario from "../demos/tema5/tareas-usuario/DemoTareasUsuario";
+import DemoLoop from "../demos/tema6/retro/DemoLoop";
+import DemoResOk from "../demos/tema6/retro/DemoResOk";
+import DemoFiltros from "../demos/tema6/retro/DemoFiltros";
+import DemoUseFetch from "../demos/tema6/usefetch/DemoUseFetch";
+import DemoCancelado from "../demos/tema6/cancelado/DemoCancelado";
+import DemoLocalStorage from "../demos/tema6/localstorage/DemoLocalStorage";
+import DemoPerezosa from "../demos/tema6/localstorage/DemoPerezosa";
+import DemoUseMemo from "../demos/tema6/usememo/DemoUseMemo";
+import DemoMemo from "../demos/tema6/memo/DemoMemo";
+import DemoUseCallback from "../demos/tema6/usecallback/DemoUseCallback";
+import DemoDebounce from "../demos/tema6/debounce/DemoDebounce";
+import DemoTaskFlow6 from "../demos/tema6/taskflow/DemoTaskFlow6";
 
 export const TEMAS = {
   1: "Introducción a React",
@@ -33,6 +45,7 @@ export const TEMAS = {
   3: "Estado y Eventos",
   4: "Comunicación entre componentes",
   5: "Hooks y Ciclo de Vida",
+  6: "Hooks Avanzados",
 };
 
 const PASOS = [
@@ -322,6 +335,150 @@ const PASOS = [
     fuente: [
       "demos/tema5/tareas-usuario/TareasDeUsuario.jsx",
       "demos/tema5/tareas-usuario/Resultado.jsx",
+    ],
+  },
+  // ---------- Tema 6 ----------
+  {
+    id: "6.1",
+    tema: 6,
+    slide: 4,
+    titulo: "Retro · Loop infinito en useEffect",
+    observar:
+      "Sin array, cada setTareas provoca un render y el efecto vuelve a correr: mira los GET repetidos en el log. El laboratorio lo frena a las 6 vueltas. Cambia a “Con []” y verás un solo GET (dos con StrictMode).",
+    Componente: DemoLoop,
+    fuente: ["demos/tema6/retro/LoopInfinito.jsx", "demos/tema6/retro/CargaUnaVez.jsx"],
+  },
+  {
+    id: "6.2",
+    tema: 6,
+    slide: 4,
+    titulo: "Retro · Revisar res.ok",
+    observar:
+      "Elige “Error 404”. El servidor responde {} y la versión sin res.ok lo guarda como si fueran tareas: tareas.map falla con un error que no menciona el fetch (la consola lo muestra a propósito). La versión con res.ok lanza el error y muestra un mensaje claro.",
+    Componente: DemoResOk,
+    fuente: ["demos/tema6/retro/SinResOk.jsx", "demos/tema6/retro/ConResOk.jsx"],
+  },
+  {
+    id: "6.3",
+    tema: 6,
+    slide: 5,
+    titulo: "Retro · Calcula, no sincronices",
+    observar:
+      "Escribe una letra y cuenta en el log: la versión con efecto renderiza dos veces (la segunda por setFiltradas) y la derivada, una. Además, la del efecto arranca vacía y se llena después del primer render.",
+    Componente: DemoFiltros,
+    fuente: ["demos/tema6/retro/FiltroConEfecto.jsx", "demos/tema6/retro/FiltroDerivado.jsx"],
+  },
+  {
+    id: "6.4",
+    tema: 6,
+    slide: 8,
+    titulo: "useFetch: un hook, dos componentes",
+    observar:
+      "ListaUsuarios y ListaTareas usan el mismo useFetch con URL distinta: cada uno tiene sus propios 3 estados. Prueba los 4 modos; toda la lógica del Tema 5 quedó dentro del hook. Con StrictMode verás una “respuesta ignorada” por lista: es la del montaje de prueba, que el cleanup canceló.",
+    Componente: DemoUseFetch,
+    fuente: [
+      "hooks/useFetch.js",
+      "demos/tema6/usefetch/ListaUsuarios.jsx",
+      "demos/tema6/usefetch/ListaTareas.jsx",
+    ],
+  },
+  {
+    id: "6.5",
+    tema: 6,
+    slide: 9,
+    titulo: "useFetch: cancelado",
+    observar:
+      "Activa “Demora aleatoria” y cambia rápido de usuario. key={usuarioId} monta un TareasDeUsuario nuevo; el anterior se desmonta, su cleanup pone cancelado = true y, si su respuesta llega tarde, el log la marca como ignorada. Es el mismo patrón que ignorar en el 5.8.",
+    Componente: DemoCancelado,
+    fuente: [
+      "hooks/useFetch.js",
+      "demos/tema6/cancelado/TareasDeUsuario.jsx",
+      "demos/tema6/cancelado/PanelUsuarios.jsx",
+    ],
+  },
+  {
+    id: "6.6",
+    tema: 6,
+    slide: 11,
+    titulo: "useLocalStorage: estado que persiste",
+    observar:
+      "Agrega notas y pulsa “Simular recarga” (o F5): siguen ahí. El getItem aparece solo al montar (dos veces con StrictMode) y cada cambio registra un setItem. “Ver lo guardado” muestra el texto JSON que guarda el navegador.",
+    Componente: DemoLocalStorage,
+    fuente: ["hooks/useLocalStorage.js", "demos/tema6/localstorage/Notas.jsx"],
+  },
+  {
+    id: "6.7",
+    tema: 6,
+    slide: 11,
+    titulo: "Inicialización perezosa",
+    observar:
+      "Pulsa “Re-render” en cada lado. Con useState(leerNotas()) el log muestra una lectura de localStorage en cada render; con useState(() => leerNotas()) solo se lee al montar.",
+    Componente: DemoPerezosa,
+    fuente: [
+      "demos/tema6/localstorage/LecturaDirecta.jsx",
+      "demos/tema6/localstorage/LecturaPerezosa.jsx",
+      "demos/tema6/localstorage/leerNotas.js",
+    ],
+  },
+  {
+    id: "6.8",
+    tema: 6,
+    slide: 13,
+    titulo: "useMemo: memoriza el resultado",
+    observar:
+      "Escribe y los dos lados filtran las 5000 tareas. Ahora pulsa “Re-render sin cambios”: sin useMemo vuelve a filtrar; con useMemo no aparece ningún calculo, porque tareas y busqueda no cambiaron.",
+    Componente: DemoUseMemo,
+    fuente: ["demos/tema6/usememo/FiltroSinMemo.jsx", "demos/tema6/usememo/FiltroConMemo.jsx"],
+  },
+  {
+    id: "6.9",
+    tema: 6,
+    slide: 14,
+    titulo: "React.memo: evita renders innecesarios",
+    observar:
+      "Pulsa el contador del padre: las 3 tarjetas sin memo se renderizan otra vez y las de memo no. El padre ya pasa un eliminar estable; por qué hace falta se ve en el 6.10. También verás los console.log en la consola.",
+    Componente: DemoMemo,
+    fuente: ["demos/tema6/memo/TarjetaTarea.jsx", "demos/tema6/memo/TarjetaSinMemo.jsx"],
+  },
+  {
+    id: "6.10",
+    tema: 6,
+    slide: 15,
+    titulo: "useCallback: la misma función en cada render",
+    observar:
+      "Las dos listas usan la misma TarjetaTarea con memo. Pulsa cada contador: sin useCallback se renderizan las 3 tarjetas, porque eliminar es una función nueva; con useCallback, ninguna.",
+    Componente: DemoUseCallback,
+    fuente: [
+      "demos/tema6/usecallback/ListaSinCallback.jsx",
+      "demos/tema6/usecallback/ListaConCallback.jsx",
+      "demos/tema6/memo/TarjetaTarea.jsx",
+    ],
+  },
+  {
+    id: "6.11",
+    tema: 6,
+    slide: 16,
+    titulo: "useDebounce: espera a que termine de escribir",
+    observar:
+      "Escribe rápido: cada tecla inicia un timer y el cleanup cancela el anterior. Solo cuando dejas de escribir durante el delay aparece un setDebounced. Cambia a 800 ms para verlo más claro.",
+    Componente: DemoDebounce,
+    fuente: ["hooks/useDebounce.js", "demos/tema6/debounce/BuscadorDebounce.jsx"],
+  },
+  {
+    id: "6.12",
+    tema: 6,
+    slide: 17,
+    titulo: "TaskFlow con custom hooks",
+    observar:
+      "Borra las tareas guardadas y carga los ejemplos con el botón. Recarga: siguen ahí. Al escribir en el buscador, el filtro corre 400 ms después y las tarjetas que no cambian no se renderizan (memo + useCallback).",
+    Componente: DemoTaskFlow6,
+    fuente: [
+      "taskflow6/App.jsx",
+      "taskflow6/ListaTareas.jsx",
+      "taskflow6/TarjetaTarea.jsx",
+      "hooks/useLocalStorage.js",
+      "hooks/useDebounce.js",
+      "hooks/useFetch.js",
     ],
   },
 ];

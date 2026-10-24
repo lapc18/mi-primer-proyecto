@@ -1,0 +1,49 @@
+/* Demos del Tema 6: dos versiones lado a lado (❌ / ✅). */
+.t6-par {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.t6-lado {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.t6-lado h3 {
+  font-family: var(--tl-mono);
+  font-size: 1rem;
+  font-variant-ligatures: none;
+}
+
+.t6-lado-mal {
+  border-color: var(--tl-red);
+}
+
+.t6-lado-bien {
+  border-color: var(--tl-teal);
+}
+
+.t6-lado-neutro {
+  border-color: var(--tl-indigo);
+}
+
+.t6-valor {
+  font-family: var(--tl-mono);
+  font-variant-ligatures: none;
+  color: var(--tl-indigo);
+}
+
+.t6-tarjeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 0.9rem;
+}
+
+.t6-tarjeta h3 {
+  font-size: 1rem;
+}
