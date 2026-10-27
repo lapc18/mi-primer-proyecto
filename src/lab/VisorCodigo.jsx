@@ -1,12 +1,16 @@
 import { useState } from "react";
 
-// Todas las fuentes de las demos, los hooks y TaskFlow como texto (?raw).
+// Todas las fuentes de las demos, los hooks, los contextos, el store y TaskFlow como texto (?raw).
 const FUENTES = import.meta.glob(
   [
     "../demos/**/*.{js,jsx}",
     "../hooks/**/*.{js,jsx}",
+    "../context/**/*.{js,jsx}",
+    "../store/**/*.{js,jsx}",
     "../taskflow/**/*.{js,jsx}",
     "../taskflow6/**/*.{js,jsx}",
+    "../taskflow7/**/*.{js,jsx,css}",
+    "../taskflow8/**/*.{js,jsx}",
   ],
   { query: "?raw", import: "default", eager: true },
 );

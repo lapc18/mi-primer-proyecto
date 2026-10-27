@@ -1,0 +1,86 @@
+/* Marco de navegador simulado para las demos con rutas (Temas 7 y 8). */
+.navegador {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--tl-border);
+  border-radius: var(--tl-radius);
+  box-shadow: var(--tl-shadow);
+  background: var(--tl-bg);
+}
+
+.navegador-barra {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--tl-surface);
+  border-bottom: 1px solid var(--tl-border);
+}
+
+.navegador-boton {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--tl-indigo);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.navegador-boton:hover {
+  background: var(--tl-tint-indigo);
+}
+
+.navegador-form {
+  flex: 1;
+}
+
+.navegador-direccion {
+  width: 100%;
+  min-height: 36px;
+  padding: 0.25rem 0.9rem;
+  border: 2px solid var(--tl-border);
+  border-radius: var(--tl-radius-pill);
+  background: var(--tl-bg);
+  font-family: var(--tl-mono);
+  font-size: 0.9rem;
+  font-variant-ligatures: none;
+}
+
+.navegador-direccion:focus-visible {
+  outline: none;
+  border-color: var(--tl-teal);
+}
+
+.navegador-atajos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  border-bottom: 1px dashed var(--tl-border);
+}
+
+.navegador-atajo {
+  padding: 0.1rem 0.6rem;
+  border: 1px solid var(--tl-border);
+  border-radius: var(--tl-radius-pill);
+  background: var(--tl-bg);
+  color: var(--tl-indigo);
+  font-family: var(--tl-mono);
+  font-size: 0.8rem;
+  font-variant-ligatures: none;
+  cursor: pointer;
+}
+
+.navegador-atajo:hover {
+  background: var(--tl-tint-indigo);
+}
+
+.navegador-contenido {
+  padding: 1rem 1.25rem;
+}

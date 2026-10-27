@@ -38,6 +38,19 @@ import DemoMemo from "../demos/tema6/memo/DemoMemo";
 import DemoUseCallback from "../demos/tema6/usecallback/DemoUseCallback";
 import DemoDebounce from "../demos/tema6/debounce/DemoDebounce";
 import DemoTaskFlow6 from "../demos/tema6/taskflow/DemoTaskFlow6";
+import DemoSinRouter from "../demos/tema7/sin-router/DemoSinRouter";
+import DemoRutas from "../demos/tema7/rutas/DemoRutas";
+import DemoLinkVsA from "../demos/tema7/link/DemoLinkVsA";
+import DemoNavLink from "../demos/tema7/navlink/DemoNavLink";
+import DemoUseParams from "../demos/tema7/useparams/DemoUseParams";
+import DemoUseNavigate from "../demos/tema7/usenavigate/DemoUseNavigate";
+import DemoTaskFlow7 from "../demos/tema7/taskflow/DemoTaskFlow7";
+import DemoDetalleApi from "../demos/tema7/detalle-api/DemoDetalleApi";
+import DemoContexto from "../demos/tema7/contexto/DemoContexto";
+import DemoPropDrilling from "../demos/tema8/prop-drilling/DemoPropDrilling";
+import DemoTema from "../demos/tema8/tema/DemoTema";
+import DemoTaskFlow8 from "../demos/tema8/taskflow/DemoTaskFlow8";
+import DemoRedux from "../demos/tema8/redux/DemoRedux";
 
 export const TEMAS = {
   1: "Introducción a React",
@@ -46,6 +59,8 @@ export const TEMAS = {
   4: "Comunicación entre componentes",
   5: "Hooks y Ciclo de Vida",
   6: "Hooks Avanzados",
+  7: "Ruteo en React",
+  8: "Estado Global",
 };
 
 const PASOS = [
@@ -480,6 +495,179 @@ const PASOS = [
       "hooks/useDebounce.js",
       "hooks/useFetch.js",
     ],
+  },
+  // ---------- Tema 7 ----------
+  {
+    id: "7.1",
+    tema: 7,
+    slide: 4,
+    titulo: "¿Por qué necesitamos React Router?",
+    observar:
+      "Navega en los dos lados. Sin router, la barra siempre dice / y ← no hace nada: la vista es solo un estado (el log lo muestra como render, nunca como ruta). Con router, cada vista tiene su URL, el log registra cada PUSH y ← vuelve a la vista anterior (POP).",
+    Componente: DemoSinRouter,
+    fuente: ["demos/tema7/sin-router/AppSinRouter.jsx", "demos/tema7/sin-router/AppConRouter.jsx"],
+  },
+  {
+    id: "7.2",
+    tema: 7,
+    slide: 5,
+    titulo: "Routes y Route: qué se ve en cada URL",
+    observar:
+      "Las Route están desordenadas a propósito y aun así /tareas/nueva muestra NuevaPage, no DetallePage: Routes elige la ruta más específica, no la primera. Escribe /xyz en la barra y Enter: cae en path=\"*\", la 404. El log dice qué Route eligió en cada caso.",
+    Componente: DemoRutas,
+    fuente: [
+      "demos/tema7/rutas/App.jsx",
+      "demos/tema7/rutas/pages/DetallePage.jsx",
+      "demos/tema7/rutas/pages/Pagina404.jsx",
+    ],
+  },
+  {
+    id: "7.3",
+    tema: 7,
+    slide: 8,
+    titulo: "Link: navegar sin recargar",
+    observar:
+      "Sube el contador en los dos lados y navega. Con <a href> el navegador pide la página al servidor y la app arranca desde cero: el contador vuelve a 0 (el laboratorio lo simula remontando, porque un <a> real recargaría todo el laboratorio). Con <Link> cambia la URL y el estado sigue vivo.",
+    Componente: DemoLinkVsA,
+    fuente: ["demos/tema7/link/NavbarConA.jsx", "demos/tema7/link/NavbarConLink.jsx"],
+  },
+  {
+    id: "7.4",
+    tema: 7,
+    slide: 9,
+    titulo: "NavLink: el enlace sabe si está activo",
+    observar:
+      "NavLink pone class=\"active\" sola al enlace actual (inspecciona el DOM). En /tareas/42, Tareas sigue activo porque la URL empieza con /tareas/. Ojo: en React Router 8, quitar end en Inicio ya NO lo deja siempre activo (to=\"/\" solo coincide con /); la trampa de la slide es de versiones viejas. Mantén end en Inicio igual: es la forma explícita y funciona en todas las versiones.",
+    Componente: DemoNavLink,
+    fuente: [
+      "taskflow7/components/Navbar.jsx",
+      "taskflow7/components/Navbar.css",
+      "demos/tema7/navlink/NavbarSinEnd.jsx",
+    ],
+  },
+  {
+    id: "7.5",
+    tema: 7,
+    slide: 10,
+    titulo: "useParams: leer la parte variable de la URL",
+    observar:
+      "useParams siempre devuelve texto: typeof id es \"string\". Por eso find con t.id === id no encuentra nada (42 === \"42\" es false) y con Number(id) sí. Prueba /tareas/999: ninguno encuentra, y no se rompe.",
+    Componente: DemoUseParams,
+    fuente: ["demos/tema7/useparams/DetallePage.jsx", "demos/tema7/useparams/BuscarTarea.jsx"],
+  },
+  {
+    id: "7.6",
+    tema: 7,
+    slide: 11,
+    titulo: "useNavigate: navegar desde el código",
+    observar:
+      "Izquierda: escribe una tarea y guarda; después de onAgregar, navigate(\"/tareas\") te lleva a la lista (mira el PUSH en el log). Derecha: entraste directo a /tareas/3, como con un link compartido. ← Volver llama navigate(-1), pero no hay historial: el log avisa que en el navegador real te sacaría de la app.",
+    Componente: DemoUseNavigate,
+    fuente: ["demos/tema7/usenavigate/NuevaTarea.jsx", "demos/tema7/usenavigate/VolverAtras.jsx"],
+  },
+  {
+    id: "7.7",
+    tema: 7,
+    slide: 12,
+    titulo: "TaskFlow con rutas",
+    observar:
+      "En tu proyecto va BrowserRouter en main.jsx. El laboratorio usa MemoryRouter para no chocar con su propia URL. Las tareas viven en App (useLocalStorage, misma clave tf-tareas que el 6.12) y bajan por props. Abre una tarea: DetallePage la busca con Number(id), no la vuelve a pedir. Elimínala: primero filter y luego navigate(\"/tareas\"). Prueba /tareas/999 y /xyz.",
+    Componente: DemoTaskFlow7,
+    fuente: [
+      "taskflow7/main.ejemplo.jsx",
+      "taskflow7/App.jsx",
+      "taskflow7/components/Navbar.jsx",
+      "taskflow7/components/TarjetaTarea.jsx",
+      "taskflow7/pages/TareasPage.jsx",
+      "taskflow7/pages/DetallePage.jsx",
+      "taskflow7/pages/Pagina404.jsx",
+    ],
+  },
+  {
+    id: "7.8",
+    tema: 7,
+    slide: 16,
+    titulo: "Variante: el detalle viene de una API",
+    observar:
+      "Activa “Demora 2 s” y pulsa Siguiente →: la URL cambia pero DetallePage no se desmonta, solo cambia el :id. Ahora se ve “Cargando...” y nunca el título anterior. Antes del arreglo de useFetch, cargando no volvía a true: seguías viendo la tarea anterior hasta que llegaba la nueva, y un error (prueba /tareas/201, que da 404) no se limpiaba al volver con ←. En el log, justo después de “cambió la URL” verás un render con los datos viejos: es el render que React descarta al ajustar el estado durante el render; nunca llega a pintarse.",
+    Componente: DemoDetalleApi,
+    fuente: ["demos/tema7/detalle-api/DetalleApiPage.jsx", "hooks/useFetch.js"],
+  },
+  {
+    id: "7.9",
+    tema: 7,
+    slide: 19,
+    titulo: "Intro: estado global con Context",
+    observar:
+      "Navbar no recibe el tema por props: BotonTema y Tarjeta lo leen directo con useContext(TemaContext). Pulsa el botón y recarga (F5): el tema se recuerda porque TemaProvider usa useLocalStorage(\"tf-tema\"). En tu proyecto, <TemaProvider> va en main.jsx, dentro de <BrowserRouter> y alrededor de <App />.",
+    Componente: DemoContexto,
+    fuente: [
+      "context/TemaContext.js",
+      "context/TemaProvider.jsx",
+      "demos/tema7/contexto/BotonTema.jsx",
+      "demos/tema7/contexto/App.jsx",
+      "demos/tema7/contexto/Navbar.jsx",
+    ],
+  },
+  // ---------- Tema 8 ----------
+  {
+    id: "8.1",
+    tema: 8,
+    slide: 5,
+    titulo: "El problema: prop drilling",
+    observar:
+      "Pulsa “Cambiar usuario” en cada lado y compara el log. Con props se renderizan App, Layout, Sidebar y Perfil, aunque Layout y Sidebar solo lo pasan. Con Context solo se renderizan UsuarioProvider y Perfil: Layout y Sidebar no se enteran.",
+    Componente: DemoPropDrilling,
+    fuente: [
+      "demos/tema8/prop-drilling/AppConProps.jsx",
+      "demos/tema8/prop-drilling/AppConContext.jsx",
+      "demos/tema8/prop-drilling/UsuarioProvider.jsx",
+    ],
+  },
+  {
+    id: "8.2",
+    tema: 8,
+    slide: 6,
+    titulo: "Context en 3 pasos: createContext, Provider y useTema",
+    observar:
+      "Tres archivos porque Vite pide que un .jsx exporte solo componentes. Alterna el tema: Navbar y App lo leen con useTema() y se recuerda al recargar (tf-tema). Marca “Renderizar fuera del Provider”: useContext da null, useTema lanza “Falta <TemaProvider>” y LimiteError lo muestra; la consola lo registra a propósito.",
+    Componente: DemoTema,
+    fuente: [
+      "context/TemaContext.js",
+      "context/TemaProvider.jsx",
+      "hooks/useTema.js",
+      "demos/tema8/tema/Navbar.jsx",
+    ],
+  },
+  {
+    id: "8.3",
+    tema: 8,
+    slide: 9,
+    titulo: "TaskFlow final: tareas en Context",
+    observar:
+      "En tu proyecto va BrowserRouter en main.jsx. El laboratorio usa MemoryRouter para no chocar con su propia URL. Las Route ya no pasan props: cada página pide sus datos con useTareas(). Pulsa “Marcar la primera pendiente” con la lista abierta: en el log solo se re-renderiza su tarjeta, porque las acciones usan useCallback y TareasPage pasa onEliminar={eliminar}, nunca () => eliminar(id). Misma clave tf-tareas que el 6.12 y el 7.7.",
+    Componente: DemoTaskFlow8,
+    fuente: [
+      "taskflow8/main.ejemplo.jsx",
+      "taskflow8/App.jsx",
+      "context/TareasContext.js",
+      "context/TareasProvider.jsx",
+      "hooks/useTareas.js",
+      "taskflow8/pages/TareasPage.jsx",
+      "taskflow8/pages/DetallePage.jsx",
+      "taskflow8/components/TarjetaTarea.jsx",
+      "taskflow8/components/Navbar.jsx",
+    ],
+  },
+  {
+    id: "8.4",
+    tema: 8,
+    slide: 15,
+    titulo: "Redux Toolkit en 4 pasos",
+    observar:
+      "Agrega y elimina: cada dispatch queda en el log como state. Dentro de createSlice sí se permite state.push: Redux Toolkit usa Immer, que trabaja sobre un borrador y arma la copia nueva por ti. Fuera de createSlice sigue prohibido mutar. El store es uno solo: las tareas siguen ahí si sales y vuelves al paso, pero no se guardan al recargar.",
+    Componente: DemoRedux,
+    fuente: ["store/tareasSlice.js", "store/store.js", "demos/tema8/redux/TareasRedux.jsx"],
   },
 ];
 

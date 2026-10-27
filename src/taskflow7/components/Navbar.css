@@ -1,0 +1,29 @@
+/* Slide 9: #5B6275 = --tl-muted y #1B1480 = --tl-indigo. */
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--tl-border);
+}
+
+.navbar .logo {
+  margin-right: auto;
+  font-weight: 900;
+  color: var(--tl-navy);
+}
+
+.navbar a {
+  color: var(--tl-muted);
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  color: var(--tl-indigo);
+}
+
+.navbar a.active {
+  color: var(--tl-indigo);
+  border-bottom: 2px solid;
+  font-weight: bold;
+}

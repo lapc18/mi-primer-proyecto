@@ -5,6 +5,16 @@ function useFetch(url) {
   const [datos, setDatos] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
+  const [urlActual, setUrlActual] = useState(url);
+
+  // Tema 7: si cambia la URL (otro :id), se reinician los 3 estados
+  if (url !== urlActual) {
+    log("state", "useFetch: cambió la URL, se reinician los 3 estados", { url }); // lab
+    setUrlActual(url);
+    setDatos(null);
+    setCargando(true);
+    setError(null);
+  }
 
   useEffect(() => {
     let cancelado = false;

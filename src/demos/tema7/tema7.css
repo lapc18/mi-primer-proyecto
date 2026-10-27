@@ -1,0 +1,82 @@
+/* Demos del Tema 7: los botones de la versión sin router se ven como enlaces. */
+.navbar button {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--tl-muted);
+  font: inherit;
+  cursor: pointer;
+}
+
+.navbar button:hover {
+  color: var(--tl-indigo);
+}
+
+.t7-dato {
+  font-family: var(--tl-mono);
+  font-variant-ligatures: none;
+  color: var(--tl-indigo);
+}
+
+.t7-pagina {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.t7-pagina a {
+  color: var(--tl-indigo);
+  font-weight: 700;
+}
+
+/* El formulario y los botones de las slides no llevan className. */
+.t7-formulario .navegador-contenido form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.t7-formulario .navegador-contenido input {
+  flex: 1;
+  min-width: 10rem;
+  min-height: 40px;
+  padding: 0.4rem 0.8rem;
+  border: 2px solid var(--tl-border);
+  border-radius: var(--tl-radius-sm);
+}
+
+.t7-formulario .navegador-contenido input:focus-visible {
+  outline: none;
+  border-color: var(--tl-teal);
+}
+
+.t7-formulario .navegador-contenido form button,
+.t7-formulario .navegador-contenido article button {
+  min-height: 40px;
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: var(--tl-radius-sm);
+  background: var(--tl-teal);
+  color: var(--tl-bg);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.t7-formulario .navegador-contenido article {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.t7-formulario .navegador-contenido a {
+  color: var(--tl-indigo);
+  font-weight: 700;
+}
+
+.t7-enlaces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

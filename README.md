@@ -10,7 +10,7 @@ Primer proyecto del curso de React de Talendig (octubre 2026). Es una aplicació
 
 ## Requisitos
 
-- [Node.js](https://nodejs.org/) (versión LTS recomendada)
+- [Node.js](https://nodejs.org/) **22.22 o mayor** (recomendado Node 24 LTS). El laboratorio usa React Router 8, que no instala ni arranca con versiones anteriores. Revisa tu versión con `node -v`.
 - npm
 
 ## Instalación

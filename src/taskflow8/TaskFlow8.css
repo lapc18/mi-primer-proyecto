@@ -1,0 +1,39 @@
+/* TaskFlow 8: el botón Eliminar de cada tarjeta y el contenedor del tema. */
+.tf8 .claro,
+.tf8 .oscuro {
+  gap: 0.75rem;
+}
+
+.tf8 .tf7-lista > .tarjeta button {
+  min-height: 36px;
+  padding: 0.3rem 0.8rem;
+  border: none;
+  border-radius: var(--tl-radius-sm);
+  background: var(--tl-red);
+  color: var(--tl-bg);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tf8 .tf7-lista > .tarjeta span {
+  margin-left: auto;
+}
+
+.tf8 .detalle button {
+  background: var(--tl-teal);
+}
+
+.tf8 .oscuro .detalle a,
+.tf8 .oscuro .pagina404 a,
+.tf8 .oscuro .tf7-lista > .tarjeta a,
+.tf8 .oscuro .tf7-pagina a {
+  color: var(--tl-aqua);
+}
+
+.tf8 .oscuro .navbar a {
+  color: var(--tl-border);
+}
+
+.tf8 .oscuro .navbar a.active {
+  color: var(--tl-aqua);
+}

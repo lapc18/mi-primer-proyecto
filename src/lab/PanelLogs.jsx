@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { getSnapshot, limpiar, subscribe } from "./devlog";
 
-const TIPOS = ["render", "state", "calculo", "effect", "cleanup", "fetch", "event", "error"];
+const TIPOS = ["render", "state", "calculo", "effect", "cleanup", "fetch", "event", "ruta", "error"];
 
 function PanelLogs() {
   const entradas = useSyncExternalStore(subscribe, getSnapshot);

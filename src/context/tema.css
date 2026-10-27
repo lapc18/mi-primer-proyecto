@@ -1,0 +1,50 @@
+/* className={tema} en el contenedor de App: "claro" u "oscuro".
+   Solo afecta al contenedor de la demo, no al laboratorio. */
+.claro,
+.oscuro {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: var(--tl-radius);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.claro {
+  background: var(--tl-bg);
+  color: var(--tl-navy);
+}
+
+.oscuro {
+  background: var(--tl-navy);
+  color: var(--tl-bg);
+}
+
+.oscuro .tarjeta {
+  background: var(--tl-indigo);
+  border-color: var(--tl-indigo);
+  color: var(--tl-bg);
+}
+
+.oscuro .navbar .logo,
+.oscuro .texto-secundario {
+  color: var(--tl-bg);
+}
+
+.claro .navbar button,
+.oscuro .navbar button {
+  min-height: 40px;
+  padding: 0.4rem 1rem;
+  border: 2px solid var(--tl-indigo);
+  border-radius: var(--tl-radius-sm);
+  background: var(--tl-bg);
+  color: var(--tl-indigo);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.oscuro .navbar button {
+  border-color: var(--tl-aqua);
+  background: var(--tl-navy);
+  color: var(--tl-aqua);
+}
